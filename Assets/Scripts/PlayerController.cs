@@ -31,7 +31,14 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(_bullet, _shootPoint.position, transform.rotation);
+        Bullet tempProjectile = Pool.Instance.GetPoolObject();
+
+        if (tempProjectile != null)
+        {
+            tempProjectile.gameObject.SetActive(true);
+            tempProjectile.transform.rotation = transform.rotation;
+            tempProjectile.transform.position = _shootPoint.position;
+        }
     }
 
     private void ShootRay()
