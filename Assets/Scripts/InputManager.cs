@@ -8,8 +8,8 @@ public class InputManager : MonoBehaviour
     public Action<Vector2> rotateAction;
     public Action<Vector3> moveAction;
 
-    public Action<bool> clickLeftButtonAction;
-    public Action<bool> clickRightButtonAction;
+    public Action clickLeftButtonAction;
+    public Action clickRightButtonAction;
     public Action jumpAction;
 
     private void Awake()
@@ -54,12 +54,12 @@ public class InputManager : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            clickLeftButtonAction?.Invoke(true);
+            clickLeftButtonAction?.Invoke();
         }
 
         if (Input.GetMouseButton(1))
         {
-            clickRightButtonAction?.Invoke(true);
+            clickRightButtonAction?.Invoke();
         }
     }
 }
