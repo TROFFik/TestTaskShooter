@@ -52,12 +52,12 @@ public class InputManager : MonoBehaviour
 
         rotateAction?.Invoke(mouseScreenPosition);
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             clickLeftButtonAction?.Invoke();
         }
 
-        if (Input.GetMouseButton(1))
+        if (Input.GetMouseButtonDown(1))
         {
             clickRightButtonAction?.Invoke();
         }
