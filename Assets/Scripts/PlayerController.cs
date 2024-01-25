@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform _shootPoint = null;
     [SerializeField] private Bullet _bullet = null;
     [SerializeField] private LineRenderer _lineRenderer = null;
+    [SerializeField] private Animator _animator = null;
 
     private void Start()
     {
@@ -18,7 +19,10 @@ public class PlayerController : MonoBehaviour
 
     private void Move(Vector3 value)
     {
-        transform.position += value * _speed * Time.deltaTime;
+        transform.position += transform.forward * value.z *_speed * Time.deltaTime;
+
+        _animator.SetFloat("Speed", value.z);
+        _animator.gameObject.transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
     private void Rotation(Vector2 value)
