@@ -10,7 +10,6 @@ public class InputManager : MonoBehaviour
 
     public Action clickLeftButtonAction;
     public Action clickRightButtonAction;
-    public Action jumpAction;
 
     private void Awake()
     {

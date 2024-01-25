@@ -3,11 +3,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float _speed = 10.0f;
+    [Header("Components")] 
     [SerializeField] private Transform _shootPoint = null;
     [SerializeField] private Bullet _bullet = null;
     [SerializeField] private LineRenderer _lineRenderer = null;
     [SerializeField] private Animator _animator = null;
+
+    [Header("Values")]
+    [SerializeField] private float _speed = 10.0f;
 
     private void Start()
     {
@@ -28,9 +31,10 @@ public class PlayerController : MonoBehaviour
     private void Rotation(Vector2 value)
     {
         Vector3 vector = value - new Vector2(0.5f, 0.5f);
-        float angle = Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
 
-        transform.eulerAngles = new Vector3(0, -angle + 90, 0);
+        float angle = -Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg + 90;
+
+        transform.eulerAngles = new Vector3(0, angle, 0);
     }
 
     private void Shoot()
@@ -78,6 +82,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnDestroy()
     {
+        InputManager.Instance.rotateAction -= Rotation;
         InputManager.Instance.moveAction -= Move;
+        InputManager.Instance.clickLeftButtonAction -= Shoot;
+        InputManager.Instance.clickRightButtonAction -= ShootRay;
     }
 }

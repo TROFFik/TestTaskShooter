@@ -19,11 +19,24 @@ public class Pool : MonoBehaviour
 
     private void Start()
     {
-        _currentObjectCount = _minObjectCount;
         CreatePool();
     }
+    private void CreateSingleton()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void CreatePool()
     {
+        _currentObjectCount = _minObjectCount;
         _listObjects = new List<Bullet>(_minObjectCount);
 
         for (int i = 0; i < _minObjectCount; i++)
@@ -41,13 +54,13 @@ public class Pool : MonoBehaviour
         TempObject.collisionAction += ReturnPoolObject;
         return TempObject;
     }
+
     public Bullet GetPoolObject()
     {
         foreach (var item in _listObjects)
         {
-            if (item.Ready)
+            if (!item.gameObject.activeInHierarchy)
             {
-                item.Ready = false;
                 return item;
             }
         }
@@ -64,20 +77,6 @@ public class Pool : MonoBehaviour
     {
         projectile.gameObject.SetActive(false);
         projectile.gameObject.transform.position = transform.position;
-        projectile.Ready = true;
-    }
-
-    private void CreateSingleton()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnDestroy()
