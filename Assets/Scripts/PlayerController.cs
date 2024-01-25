@@ -5,7 +5,6 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Components")] 
     [SerializeField] private Transform _shootPoint = null;
-    [SerializeField] private Bullet _bullet = null;
     [SerializeField] private LineRenderer _lineRenderer = null;
     [SerializeField] private Animator _animator = null;
 
